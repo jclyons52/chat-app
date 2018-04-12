@@ -4,7 +4,7 @@ import { Http } from '@angular/http';
 import { Injectable } from '@angular/core';
 import { MessageDTO, UserDTO } from 'shared/types';
 import Socket = SocketIOClient.Socket;
-
+import {IS_WRITING, IS_NOT_WRITING, DATA } from 'shared/messages';
 @Injectable()
 export class MessageService {
 
@@ -18,14 +18,14 @@ export class MessageService {
   }
 
   isWriting(user: UserDTO) {
-    this.socket.emit('isWriting', user);
+    this.socket.emit(IS_WRITING, user);
   }
 
   isNotWriting () {
-    this.socket.emit('isNotWriting');
+    this.socket.emit(IS_NOT_WRITING);
   }
 
   sendMessage (message: MessageDTO) {
-    this.socket.emit('data', message);
+    this.socket.emit(DATA, message);
   }
 }
