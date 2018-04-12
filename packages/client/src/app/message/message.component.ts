@@ -4,6 +4,7 @@ import { MessageDTO, UserDTO } from 'shared/types';
 import { MessageService } from './message.service';
 import { UserService } from '../user/user.service';
 import Socket = SocketIOClient.Socket;
+import { NEW_MESSAGE, IS_WRITING, IS_NOT_WRITING, ALL_MESSAGES } from 'shared/messages';
 
 @Component({
   selector: 'app-message',
@@ -29,10 +30,10 @@ export class MessageComponent implements OnInit {
   ngOnInit(): void {
     this.actualUser = this.userService.userConnected;
     this.socket = this.messageService.connectSocket();
-    this.socket.on('allMessages', (message: MessageDTO[]) => this.messages = message);
-    this.socket.on('newMessage', (message: MessageDTO) => this.messages.push(message));
-    this.socket.on('isWriting', (user: UserDTO) => this.writing = user.name);
-    this.socket.on('isNotWriting', () => this.writing = '');
+    this.socket.on(ALL_MESSAGES, (message: MessageDTO[]) => this.messages = message);
+    this.socket.on(NEW_MESSAGE, (message: MessageDTO) => this.messages.push(message));
+    this.socket.on(IS_WRITING, (user: UserDTO) => this.writing = user.name);
+    this.socket.on(IS_NOT_WRITING, () => this.writing = '');
   }
 
   isWriting() {

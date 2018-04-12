@@ -6,6 +6,6 @@ import { UserService } from 'user/user.service';
 
 @Module({
     controllers: [ChatController],
-    components: [ChatService, ChatGateway, UserService],
+    components: [ChatService, ChatGateway],
 })
 export class ChatModule {}

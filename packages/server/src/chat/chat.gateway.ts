@@ -1,14 +1,22 @@
-import { WebSocketGateway, NestGateway, SubscribeMessage } from '@nestjs/websockets';
+import { WebSocketGateway, NestGateway, SubscribeMessage, WsResponse } from '@nestjs/websockets';
 import { Socket } from 'socket.io';
 import { ChatService } from './chat.service';
 import { Message } from './message.entity';
 import { User } from 'user/user.entity';
-import { NEW_MESSAGE, IS_WRITING, IS_NOT_WRITING, DATA } from 'shared/messages';
+import { NEW_MESSAGE, IS_WRITING, IS_NOT_WRITING, DATA, ALL_MESSAGES } from 'shared/messages';
 @WebSocketGateway({ port: 1080, namespace: 'messages' })
 export class ChatGateway implements NestGateway {
     socket: Socket;
 
     constructor(private chatService: ChatService) {}
+
+    afterInit(server) {}
+
+    handleConnection(socket) {
+        process.nextTick(() => {
+            this.socket.emit(ALL_MESSAGES, this.chatService.getMessages());
+        });
+    }
 
     handleDisconnect(socket) {}
 
