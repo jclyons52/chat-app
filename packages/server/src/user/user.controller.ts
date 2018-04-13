@@ -1,8 +1,6 @@
-import { Controller, Post, Response, Body, HttpStatus } from '@nestjs/common';
-import { UserService } from './user.service';
-import { User } from './user.entity';
+import { Body, Controller, Post } from '@nestjs/common';
 import { UserDTO } from 'shared/types';
-import { Response as IResponse } from 'express';
+import { UserService } from './user.service';
 
 @Controller('users')
 export class UserController {

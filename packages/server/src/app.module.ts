@@ -1,10 +1,9 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { AppController } from './app.controller';
-import { UserModule } from 'user/user.module';
 import { ChatModule } from 'chat/chat.module';
 import { AuthModule } from 'security/auth.module';
-import { Connection } from 'typeorm';
+import { UserModule } from 'user/user.module';
+import { AppController } from './app.controller';
 
 @Module({
   imports: [TypeOrmModule.forRoot({

@@ -1,4 +1,4 @@
-import { Controller, Post, HttpCode, HttpStatus, Get } from '@nestjs/common';
+import { Controller, Get, HttpCode, HttpStatus, Post } from '@nestjs/common';
 import { AuthService } from './auth.service';
 
 @Controller('auth')
